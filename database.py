@@ -37,7 +37,7 @@ class Database:
         return password
 
     def ESTABLISH_CONNECTION(self):
-        self.conn = psycopg2.connect("postgres://avnadmin:AVNS_WBYvwycchQFB8qKKVeh@flasktest-testing-verma.g.aivencloud.com:26275/defaultdb?sslmode=require")
+        self.conn = psycopg2.connect("<DATABASECONNHERE>")
         self.cursor = self.conn.cursor()
     def CLOSE_CONNECTION(self):
         self.cursor.close()
