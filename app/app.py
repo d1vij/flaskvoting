@@ -12,6 +12,22 @@ from utils import hash_string, SECRET_KEY, posts
 from database import Database
 from VerhoeffChecksum import VerhoeffChecksum, random_number
 from random import shuffle
+
+
+"""
+Main application class
+
+
+
+
+
+
+
+"""
+
+
+
+
 class App:
     def __init__(self):
         self.app = Flask(__name__, template_folder = "Templates", static_folder = "static")
@@ -36,15 +52,6 @@ class App:
                 session.clear()
                 return render_template("login.html")
                 
-                
-                
-                
-                
-                # if len(request.cookies):        #ie some cookies are present in session
-                #     return redirect(url_for("logout"))
-                # else:
-                #     return render_template("login.html")
-
             elif request.method =="POST":
                 uid : str = request.form.get("uid")                 #getting the user inputted data
                 password : str = request.form.get("password")
@@ -98,10 +105,10 @@ class App:
 
                 return self.process_votes(vote_data, session.get("uid"))
 
-    #custom filters for jinja templating
+    #custom jinja templating filters
     def filters(self):
         @self.app.template_filter("normalize")
-        def normalize(string : str):
+        def normalize(string : str): # normalizes the post titles as they are stored with underscores in the db
             return string.replace('_',' ').title()
         @self.app.template_filter("shuffle_candidates")
         def shuffle_candidates(list_ : list):
@@ -110,18 +117,24 @@ class App:
 
 
     def process_votes(self, vote_data : dict[str:str], uid = None):
-        self.database.ESTABLISH_CONNECTION()
-        for post, candidate in vote_data.items():
-            self.database.increment_for(table=post, candidate_name = candidate)
+        
+        if self.database.get_vote_status(uid) == "true": # this prevents user from going back in tab after voting and submitting again1
+            flash("You have already voted once")
+            return render_template("login.html")
 
-        # logging in votes_log table
-        self.database.votelog(uid=uid,
-                              voted_for=', '.join([str(data).replace("'","") for data in vote_data.items()]),
-                              voting_time = datetime.now().strftime("%I:%M:%S %p on %d-%m-%y"))
+        else:        
+            self.database.ESTABLISH_CONNECTION()
+            for post, candidate in vote_data.items():
+                self.database.increment_for(table=post, candidate_name = candidate)
 
-        self.database.voted(uid = uid)  # updating to db that user has voted
-        self.database.CLOSE_CONNECTION()
-        return render_template("something.html")
+            # logging in votes_log table
+            self.database.votelog(uid=uid,
+                                voted_for=', '.join([str(data).replace("'","") for data in vote_data.items()]),
+                                voting_time = datetime.now().strftime("%I:%M:%S %p on %d-%m-%y"))
+
+            self.database.voted(uid = uid)  # updating to db that user has voted
+            self.database.CLOSE_CONNECTION()
+            return render_template("something.html")
 
 
 
@@ -134,3 +147,5 @@ if __name__=="__main__":
     to open to all networks
     https://api.zrok.io/
     """
+    
+    

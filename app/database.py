@@ -1,5 +1,63 @@
 import psycopg2
 from utils import posts as current_posts
+from utils import connection_string
+
+
+"""
+-> Setup your database string in the utils.connection_string
+
+* Control class for the database
+* Methods
+> ESTABLISH_CONNECTION -> connects to the database and instantiates a cursor
+                        - On demand connection ensures that connection to database is only occuring when required 
+                          rather than staying connected throughout the session
+> CLOSE_CONNECTION
+> add_user -> params :
+                gr_number : str
+                uid : str
+                password : str
+              returns : None
+
+            -> adds a new user entry in the login_data column
+            -  and sets the has_voted entry to be false
+
+> has_gr_number -> params : number : str
+                   returns : bool
+                -> checks if the login_data table has a entry of specified gr_number
+                
+
+> has_uid -> params : uid : str
+             returns : bool
+             -> checks if the login_data table has a entry of specified uid
+
+> get_credentials -> params: uid : str
+                     returns : str
+                     -> returns the stored password for the given uid from the table login_data
+
+> get_vote_status -> params : uid : str
+                     returns : str 
+                    -> checks the login_data table and returns the has_voted value the provided uid
+                    (note - bool in postgresql is stored as true/false (with a small t&f) whereas for python
+                    its True/False, hence to avoid redundant complexity status is stored a string with small t&f)
+
+> increment_for -> params : table : str
+                            candidate_name : str
+                    returns : None
+                -> increments the vote (by one) for the provided candidate where the table name provided is the post name
+                 
+> voted -> params : uid : str
+           returns : None
+        -> updates the 'has_voted' to 'true' for the provided uid in the login_data table
+
+> vote_log -> params : uid : str
+                       voted_for : str[**tuple[str,str]]
+                       voted_at : str
+            -> stores the uid, voted candidates (and their post) and the time of voting in the vote_log table
+
+"""
+
+
+
 class Database:
     def __init__(self):
         self.conn = None
@@ -63,7 +121,7 @@ class Database:
         self.CLOSE_CONNECTION()
 
     def ESTABLISH_CONNECTION(self):
-        self.conn = psycopg2.connect("postgresql://postgres:1234@localhost:5432/flasklogin")
+        self.conn = psycopg2.connect(connection_string)
         self.cursor = self.conn.cursor()
     def CLOSE_CONNECTION(self):
         self.cursor.close()
