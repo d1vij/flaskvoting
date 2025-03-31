@@ -8,21 +8,14 @@ from flask import session
 from flask import render_template
 from flask import flash
 
-from utils import hash_string, SECRET_KEY, posts
+from utils import hash_string, SECRET_KEY, posts, ENABLE_ACCOUNT_CREATION
 from database import Database
-from VerhoeffChecksum import VerhoeffChecksum, random_number
+from verhoeffchecksum import VerhoeffChecksum, random_number
 from random import shuffle
 
 
 """
 Main application class
-
-
-
-
-
-
-
 """
 
 
@@ -50,7 +43,7 @@ class App:
         def login():
             if request.method == "GET":
                 session.clear()
-                return render_template("login.html")
+                return render_template("login.html",render_create_account=ENABLE_ACCOUNT_CREATION)
                 
             elif request.method =="POST":
                 uid : str = request.form.get("uid")                 #getting the user inputted data
@@ -80,6 +73,9 @@ class App:
 
         @self.app.route("/createuser",methods=["POST","GET"])
         def create_user():
+            if not ENABLE_ACCOUNT_CREATION: #if false
+                flash("account creation is disabled !")
+                return redirect("login")
             if request.method=="GET":return render_template("create_user.html")
             elif request.method == "POST":
                 gr_number = request.form.get("gr_number")

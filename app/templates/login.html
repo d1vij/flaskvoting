@@ -24,9 +24,11 @@
             </label>
             <button type="submit" class="form-button">Login</button>
         </form>
-        <a href="{{ url_for('create_user') }}">
-            <button type="button" class="form-button secondary-button">Create account</button>
-        </a>
+        {%if render_create_account%}
+            <a href="{{ url_for('create_user') }}">
+                <button type="button" class="form-button secondary-button">Create account</button>
+            </a>
+        {%endif%}
     </div>
 </body>
 </html>
