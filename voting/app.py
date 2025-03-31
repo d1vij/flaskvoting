@@ -5,7 +5,6 @@ from random import shuffle
 
 
 
-
 def vote_for(candidates : dict) -> None:
     conn = sqlite3.connect(database=database)
     cursor = conn.cursor()
@@ -91,4 +90,5 @@ class App:
 
 app = App()
 if __name__ == "__main__":
+    print("ENSURE THAT DATRABSE IS SETTED UP CORRECTLY")
     app.app.run('0.0.0.0', debug=True)    
