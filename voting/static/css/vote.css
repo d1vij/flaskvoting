@@ -1,0 +1,118 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+#flash p {
+    padding: 10px;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    color: #3c763d;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+/* Vote Container */
+#vote {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Post Container */
+.post {
+    margin-bottom: 20px;
+}
+
+.post h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Candidate Container */
+.candidate-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.candidate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1 1 calc(20% - 10px); /* 5 candidates per row */
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative; /* Ensure the label covers the entire candidate */
+}
+
+/* Hide the radio button */
+.candidate input[type="radio"] {
+    display: none;
+}
+
+/* Style for the label to cover the entire candidate */
+.candidate-label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Style for selected candidate */
+.candidate input[type="radio"]:checked + .candidate-label {
+    background-color: #e8f5e9; /* Light green background */
+}
+
+.candidate input[type="radio"]:checked + .candidate-label img {
+    border: 3px solid #28a745; /* Highlight image */
+}
+
+.candidate input[type="radio"]:checked + .candidate-label span {
+    color: #28a745; /* Change text color */
+    font-weight: bold;
+}
+
+/* Candidate Content */
+.candidate-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.candidate img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.candidate span {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Submit Button */
+#submit-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#submit-button:hover {
+    background-color: #218838;
+}

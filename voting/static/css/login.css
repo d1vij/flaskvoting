@@ -1,0 +1,91 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Flash Messages */
+#flash {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#flash p {
+    padding: 10px;
+    background-color: rgba(220, 74, 74, 0.52);
+    border: 1px solid #d6e9c6;
+    color: #000000;
+    border-radius: 4px;
+    margin: 0;
+}
+
+/* Form Container */
+#form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Form Labels */
+.form-label {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Form Inputs */
+.form-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    border-color: #28a745;
+    outline: none;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+/* Form Buttons */
+.form-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Space between buttons */
+}
+
+.form-button:hover {
+    background-color: #218838;
+}
+
+/* Secondary Button (Create account) */
+.secondary-button {
+    background-color: #6c757d; /* Gray color for the secondary button */
+}
+
+.secondary-button:hover {
+    background-color: #5a6268; /* Darker gray on hover */
+}

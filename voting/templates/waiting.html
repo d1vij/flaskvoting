@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+    <head>
+        <!-- disabling browser caching of vote page, prevents user from going back and voting again -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+        
+        <title>Go to voting</title>
+    </head>
+        <a>{{flash_}}</a>
+
+        
+        <form method="POST" action="{{url_for('waiting')}}">
+            <input type="password" name='pw' placeholder="Password">
+            <input type="submit" value="GO to voting">
+            
+        </form>
+        
+    </body>
+    
+</html>
