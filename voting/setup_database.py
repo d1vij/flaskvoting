@@ -1,4 +1,5 @@
 from utils import posts, database
+import sqlite3
 def setup_datababse():
         conn = sqlite3.connect(database=database)
         cursor = conn.cursor()
@@ -9,3 +10,5 @@ def setup_datababse():
             for name in candidates:
                 cursor.execute(f"insert into {post}(name) values(?)", (name,))
             conn.commit()
+            
+if __name__=="__main__":setup_datababse()
